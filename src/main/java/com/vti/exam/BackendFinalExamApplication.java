@@ -8,6 +8,7 @@ public class BackendFinalExamApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BackendFinalExamApplication.class, args);
+
 	}
 
 }

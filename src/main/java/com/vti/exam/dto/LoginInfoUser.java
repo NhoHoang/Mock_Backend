@@ -9,7 +9,7 @@ public class LoginInfoUser {
 	private String email;
 
 	private String fullName;
-	
+
 	private String address;
 
 	private String role;
@@ -62,6 +62,14 @@ public class LoginInfoUser {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public LoginInfoUser(String token, String userName, String email, String fullName, String role, String status) {

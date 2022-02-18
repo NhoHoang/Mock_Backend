@@ -36,14 +36,23 @@ public class JWTTokenService {
                 .compact();
         
         // convert user entity to user dto
-        LoginInfoUser userDto = new LoginInfoUser(
-        		// nếu user chưa được active thì sẽ không gửi lên token
-        		user.getStatus().equals(UserStatus.ACTIVE) ? JWT : null, 
+        LoginInfoUser userDto = new LoginInfoUser(user.getStatus().equals(UserStatus.ACTIVE) ? JWT : null, 
         		user.getUserName(), 
         		user.getEmail(), 
         		user.getFullName(),
+        		user.getAddress(),
         		user.getRole(), 
         		user.getStatus().toString());
+        		
+//        		LoginInfoUser(
+//        		// nếu user chưa được active thì sẽ không gửi lên token
+//        		user.getStatus().equals(UserStatus.ACTIVE) ? JWT : null, 
+//        		user.getUserName(), 
+//        		user.getEmail(), 
+//        		user.getFullName(),
+//        		user.getAddress(),
+//        		user.getRole(), 
+//        		user.getStatus().toString());
         
         // convert object to json
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();

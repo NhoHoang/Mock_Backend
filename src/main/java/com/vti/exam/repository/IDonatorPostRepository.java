@@ -4,9 +4,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import com.vti.exam.entity.Donator;
+import com.vti.exam.entity.Donator_Post;
 
-public interface IDonatorRepository extends JpaRepository<Donator, Integer>, JpaSpecificationExecutor<Donator> {
-
-	boolean existsByPhone(String phone);
+public interface IDonatorPostRepository extends JpaRepository<Donator_Post, Integer> {
 
 }

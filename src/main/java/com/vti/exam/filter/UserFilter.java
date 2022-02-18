@@ -9,7 +9,7 @@ public class UserFilter {
 	int minId;
 	int maxId;
 	String role;
-//chưanra
+
 	public String getLikeName() {
 		return likeName;
 	}

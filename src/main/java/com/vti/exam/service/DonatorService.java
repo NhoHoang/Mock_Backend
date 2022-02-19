@@ -3,14 +3,15 @@ package com.vti.exam.service;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.vti.exam.dto.DonatorDTO;
+import com.vti.exam.dto.DonatorPostDTO;
 import com.vti.exam.entity.Donator;
 import com.vti.exam.entity.Donator_Post;
+import com.vti.exam.entity.Post;
 import com.vti.exam.repository.IDonatorPostRepository;
 import com.vti.exam.repository.IDonatorRepository;
+import com.vti.exam.repository.IPostRepository;
 
 @Service
 public class DonatorService implements IDonatorService {
@@ -20,6 +21,8 @@ public class DonatorService implements IDonatorService {
 
 	@Autowired
 	private IDonatorPostRepository Dprepository;
+	@Autowired
+	private IPostRepository PostRepository;
 
 	@Override
 	public ArrayList<Donator> getAllDonator() {
@@ -28,21 +31,29 @@ public class DonatorService implements IDonatorService {
 	}
 
 	@Override
-	public boolean existsDonatorByPhone(String phone) {
-		return repository.existsByPhone(phone);
+	public void createDonatePost(int donatorId, int postId, String mess, int money) {
+		Donator_Post donatorPost = new Donator_Post();
+		Post post = new Post(postId);
+		Donator donator = new Donator(donatorId);
+		donatorPost.setDonator(donator);
+		donatorPost.setPost(post);
+		donatorPost.setMessage(mess);
+		donatorPost.setTotal_money(money);
+		Dprepository.save(donatorPost);
+
+		PostRepository.extraMoney(postId, money);
 	}
 
 	@Override
-	public void createDonator(Donator donator) {
+	public Donator findDonatorByPhone(String phone) {
+		Donator donator = repository.findAllByPhone(phone);
+		return donator;
+	}
+
+	@Override
+	public void createDonator(DonatorPostDTO dto) {
+		Donator donator = new Donator(dto.getPhone(), dto.getFullName(), dto.getEmail(), dto.getAddress());
 		repository.save(donator);
-	}
-
-	@Override
-	public void createDonatePost(Donator donator, Donator_Post donatorPostEntity) {
-		Donator_Post donator_Post = new Donator_Post(donator, donatorPostEntity.getPost(),
-				donatorPostEntity.getTotal_money(), donatorPostEntity.getMessage());
-
-		Dprepository.save(donator_Post);
 
 	}
 

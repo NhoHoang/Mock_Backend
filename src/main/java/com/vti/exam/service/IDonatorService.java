@@ -2,20 +2,17 @@ package com.vti.exam.service;
 
 import java.util.ArrayList;
 
-import org.springframework.http.ResponseEntity;
-
-import com.vti.exam.dto.DonatorDTO;
+import com.vti.exam.dto.DonatorPostDTO;
 import com.vti.exam.entity.Donator;
-import com.vti.exam.entity.Donator_Post;
 
 public interface IDonatorService {
 
 	ArrayList<Donator> getAllDonator();
 
-	boolean existsDonatorByPhone(String phone);
+	void createDonatePost(int donatorId, int postId, String mess, int money);
 
-	void createDonator(Donator donator);
+	Donator findDonatorByPhone(String phone);
 
-	void createDonatePost(Donator donator, Donator_Post donatorPostEntity);
+	void createDonator(DonatorPostDTO dto);
 
 }

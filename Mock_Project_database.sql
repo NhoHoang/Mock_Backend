@@ -146,14 +146,14 @@ VALUE						('1',						'2',							'10', 'xin gui tien2' ),
       
       
  --      
-select p.title, dp.donatorid, dp.total_money from 
+select p.id,p.title, dp.donatorid, dp.total_money from 
 post as p
 join 
 donator_post as dp
 on p.id = dp.postid
 where dp.postid = 2;
 
-select d.fullName, dp.postID, p.title from 
+select d.fullName, dp.postID,dp.total_money, p.title from 
 donator as d
 join 
 donator_post as dp
@@ -185,9 +185,19 @@ INSERT INTO `mock_project`.`post` (`title`, `content_1`, `img_1`, `content_2`, `
 INSERT INTO `mock_project`.`post` (`title`, `content_1`, `img_1`, `content_2`, `img_2`, `donator_quantity`, `money_achieved`, `startDate`, `finishDate`) VALUES ('Chung tay mang Tết đến cho 40 trẻ mồ côi do đại dịch và trẻ có hoàn cảnh khó khăn', 'Xã Nậm Ty nằm ở phía nam của huyện Hoàng Su Phì, trên trục đường Bắc Quang - Xín Mần Thuộc huyện Hoàng Su Phì, tỉnh Hà Giang. Toàn xã có 02 dân tộc sinh sống chủ yếu. Địa hình địa lý của xã tương đối phức tạp có nhiều núi cao, suối lớn và sâu chia cắt, đường đi lại khó khăn. Đồng thời dân cư phân bố không tập trung dẫn đến việc mở điểm trường, mở lớp gặp rất nhiều trở ngại. Đặc biệt là học sinh tiểu học còn nhỏ khi mùa mưa lũ đến, đi lại vô cùng nguy hiểm. Hiện nay xã có 3 cấp học bao gồm bậc Mầm non, Tiểu học và Trung học Cơ sở.', 'qeq', 'Thấu hiểu hoàn cảnh khó khăn của thầy và trò điểm trường Tấn Xà Phìn, MoMo hợp tác cùng Trung tâm Tình nguyện Quốc gia, Dự án Sức mạnh 2000 và Dự án Nuôi Em lên kế- hoạch sửa chữa và xây dựng phòng học mới, để các em có đường nơi học tập kiên cố, tiện nghi. Trong chiến dịch xây trường lần này, chúng tôi chia thành 2 đợt gây quỹ. Đợt 1 quyên góp qua Heo Đất MoMo số tiền 100 triệu và đợt 2 gây quỹ cộng đồng trên Trái Tim MoMo 220 triệu đồng. Hiện tại, chúng tôi đang tiến hành quyên góp đợt 2 qua Trái Tim MoMo. Để đi theo kế hoạch như dự tính, chúng tôi đặt mục tiêu quyên góp 220 triệu đồng từ các nhà hảo tâm để nhanh chóng có đủ kinh phí xây dựng phòng học mới khang trang cho các em học sinh.', 'qeqq', '20', '100', '2009-07-09 00:00:00', '2009-07-09 00:00:00');
 
 
-INSERT INTO `Donator_Post` 	(`donatorID`,			`postID`			)
-VALUE						('1',						'2'		 );
-                     
+UPDATE `mock_project`.`post` SET `img_1` = 'https://vietnamtimes.org.vn/stores/news_dataimages/vietnamfriendshipcomvn/082017/31/13/charity-in-vietnam-help-is-sometimes-hard-to-get-19-.9181.jpg' WHERE (`id` = '1');
+UPDATE `mock_project`.`post` SET `img_1` = 'https://culturemagazin.com/wp-content/uploads/2021/06/0615-DSC_0292.jpg' WHERE (`id` = '2');
+UPDATE `mock_project`.`post` SET `img_1` = 'https://www.infoans.org/media/k2/items/cache/d02e1963c5cb9bab23e5b5464248be42_XL.jpg' WHERE (`id` = '3');
+UPDATE `mock_project`.`post` SET `img_1` = 'https://www.saigonchildren.com/wp-content/uploads/2019/06/5828_tre_em_tu_ky.jpg' WHERE (`id` = '4');
+UPDATE `mock_project`.`post` SET `img_1` = 'https://foodbankvietnam.com/wp-content/uploads/2021/10/f1.jpg' WHERE (`id` = '5');
+UPDATE `mock_project`.`post` SET `img_1` = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxMNMdXHrRYB_hGF8XX5SdfCZHms_Vf03D0A&usqp=CAU' WHERE (`id` = '6');
+UPDATE `mock_project`.`post` SET `img_1` = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiIAnARRkJ_XleVfy8JMIiPI9Z49XFmvRZVw&usqp=CAU' WHERE (`id` = '7');
+UPDATE `mock_project`.`post` SET `img_1` = 'https://genk.mediacdn.vn/139269124445442048/2020/8/25/photo-2-15983215596491753953354.jpeg' WHERE (`id` = '8');
+UPDATE `mock_project`.`post` SET `img_1` = 'https://photo-cms-vovworld.zadn.vn/w500/uploaded/vovworld/vowklqmx/2021_03_25/ps1_kfxd.jpg' WHERE (`id` = '9');
+UPDATE `mock_project`.`post` SET `img_1` = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHylNWX3d-BuUNDP7Aa8SWwgf4MD9w0yijaQ&usqp=CAU' WHERE (`id` = '10');
+UPDATE `mock_project`.`post` SET `img_1` = 'https://www.asialifemagazine.com/vietnam/wp-content/uploads/sites/4/2013/04/Urban-gardening-charity.jpg' WHERE (`id` = '11');
+UPDATE `mock_project`.`post` SET `img_1` = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjd1TmWLUYxTbtC6bMjkEwNNbNg6mRH4h_QQ&usqp=CAU' WHERE (`id` = '12');
+               
 				
                 
             --     // -----------------------------------------

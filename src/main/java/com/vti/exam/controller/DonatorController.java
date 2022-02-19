@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.vti.exam.dto.DonatorDTO;
 import com.vti.exam.dto.DonatorPostDTO;
 import com.vti.exam.entity.Donator;
 import com.vti.exam.service.IDonatorService;
@@ -35,35 +34,32 @@ public class DonatorController {
 	}
 
 	@GetMapping(value = "/check/{phone}")
-	public boolean existsDonatorByPhone(@PathVariable(name = "phone") String phone) {
+	public Donator findDonatorByPhone(@PathVariable(name = "phone") String phone) {
 		// get entity
-		boolean result = service.existsDonatorByPhone(phone);
-
+		Donator donator = service.findDonatorByPhone(phone);
 		// return result
-		return result;
+		return donator;
 	}
 
 	@PostMapping()
-	public Donator createDonator(@RequestBody Donator donator) {
+	public ResponseEntity<?> createDonator(@RequestBody DonatorPostDTO dto) {
 
-		service.createDonator(donator);
+		service.createDonator(dto);
 
-		return donator;
+		return new ResponseEntity<>("Đăng ký thành công", HttpStatus.OK);
 	}
 
 	@PostMapping(value = "/donatorpost")
 	public ResponseEntity<?> createDonate(@RequestBody DonatorPostDTO dto) {
-
-		if (!existsDonatorByPhone(dto.getPhone())) {
-			// create Donator
-			Donator donator = createDonator(dto.toDonatorEntity());
-
-			// ==> get donator.id
-			// int donatorId = donator.getBody().getId();
-
-			service.createDonatePost(donator, dto.toDonatorPostEntity());
+		Donator donator = service.findDonatorByPhone(dto.getPhone());
+		if (donator == null) {
+			service.createDonator(dto);
+			Donator donatorNew = service.findDonatorByPhone(dto.getPhone());
+			service.createDonatePost(donatorNew.getId(), dto.getPost().getId(), dto.getMessage(),
+					dto.getMoneyDonation());
+		} else {
+			service.createDonatePost(donator.getId(), dto.getPost().getId(), dto.getMessage(), dto.getMoneyDonation());
 		}
-
-		return new ResponseEntity<>("Đang quyên góp", HttpStatus.OK);
+		return new ResponseEntity<>("Đã quyên góp, xin cảm ơn!", HttpStatus.OK);
 	}
 }

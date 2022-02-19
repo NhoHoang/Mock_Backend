@@ -1,8 +1,6 @@
 package com.vti.exam.dto;
 
 import com.vti.exam.entity.Donator;
-import com.vti.exam.entity.Donator_Post;
-import com.vti.exam.entity.Post;
 
 public class DonatorDTO {
 	private String fullName;
@@ -57,7 +55,11 @@ public class DonatorDTO {
 
 	// method toEntity()
 	public Donator toDonatorEntity() {
-		return new Donator(fullName, email, address, phone);
+		return new Donator(phone, fullName, email, address);
+	}
+
+	public Donator toDonatorEntity1() {
+		return new Donator(phone, fullName, email, address);
 	}
 
 }

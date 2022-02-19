@@ -2,19 +2,15 @@ package com.vti.exam.entity;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -43,10 +39,10 @@ public class Post implements Serializable {
 	private String img_2;
 
 	@Column(name = "`donator_quantity`")
-	private String donator_quantity;
+	private int donator_quantity;
 
 	@Column(name = "`money_achieved`")
-	private String money_achieved;
+	private int money_achieved;
 
 	private String startDate;
 
@@ -59,7 +55,7 @@ public class Post implements Serializable {
 
 	// -----------------------------contructor-------------------------------------
 	public Post(int id, String title, String content_1, String content_2, String img_1, String img_2,
-			String donator_quantity, String money_achieved, String startDate, String finishDate) {
+			int donator_quantity, int money_achieved, String startDate, String finishDate) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -71,6 +67,11 @@ public class Post implements Serializable {
 		this.money_achieved = money_achieved;
 		this.startDate = startDate;
 		this.finishDate = finishDate;
+	}
+
+	public Post(int id) {
+		super();
+		this.id = id;
 	}
 
 	public Post() {
@@ -135,19 +136,19 @@ public class Post implements Serializable {
 		this.img_2 = img_2;
 	}
 
-	public String getDonator_quantity() {
+	public int getDonator_quantity() {
 		return donator_quantity;
 	}
 
-	public void setDonator_quantity(String donator_quantity) {
+	public void setDonator_quantity(int donator_quantity) {
 		this.donator_quantity = donator_quantity;
 	}
 
-	public String getMoney_achieved() {
+	public int getMoney_achieved() {
 		return money_achieved;
 	}
 
-	public void setMoney_achieved(String money_achieved) {
+	public void setMoney_achieved(int money_achieved) {
 		this.money_achieved = money_achieved;
 	}
 

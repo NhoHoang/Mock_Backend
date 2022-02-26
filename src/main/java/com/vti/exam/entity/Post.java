@@ -44,6 +44,9 @@ public class Post implements Serializable {
 	@Column(name = "`money_achieved`")
 	private int money_achieved;
 
+	@Column(name = "`plan_budget`")
+	private int planBudget;
+
 	private String startDate;
 
 	private String finishDate;
@@ -88,8 +91,17 @@ public class Post implements Serializable {
 	}
 
 	// ----------------------------- getter & setter-----------------------------
+
 	public int getId() {
 		return id;
+	}
+
+	public int getPlanBudget() {
+		return planBudget;
+	}
+
+	public void setPlanBudget(int planBudget) {
+		this.planBudget = planBudget;
 	}
 
 	public void setId(int id) {

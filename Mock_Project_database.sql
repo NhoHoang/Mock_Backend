@@ -9,7 +9,7 @@ DROP TABLE IF EXISTS 	`User`;
 CREATE TABLE IF NOT EXISTS `User` ( 	
 	id 				SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 	`username`	 	CHAR(50) NOT NULL UNIQUE CHECK (LENGTH(`username`) >= 6 AND LENGTH(`username`) <= 50),
-	`email` 		CHAR(50) NOT NULL UNIQUE CHECK (LENGTH(`email`) >= 6 AND LENGTH(`email`) <= 50),
+	`email` 		CHAR(50) NOT NULL UNIQUE  CHECK (LENGTH(`email`) >= 6 AND LENGTH(`email`) <= 50),
 	`password` 		VARCHAR(800) NOT NULL,
     `address` 		VARCHAR(800) ,
     `fullName` 		VARCHAR(50) NOT NULL,
@@ -28,7 +28,9 @@ CREATE TABLE IF NOT EXISTS `Post` (
     `content_2` 		VARCHAR(6000) NOT NULL,
 	`img_2`				VARCHAR(500),
 	`donator_quantity` 	SMALLINT ,
-    `money_achieved` 	SMALLINT ,
+    `money_achieved` 	INT ,
+	`plan_budget` 		INT ,
+     `rate` 			float ,
     `startDate` 		DATETIME NOT NULL,
     `finishDate` 		DATETIME NOT NULL
 );
@@ -38,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `Donator` (
 	`id` 				SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 	`phone` 			VARCHAR(50) NOT NULL UNIQUE,
     `fullName` 			VARCHAR(50) NOT NULL,
-    `email` 			CHAR(50) NOT NULL UNIQUE CHECK (LENGTH(`email`) >= 6 AND LENGTH(`email`) <= 50),
+    `email` 			CHAR(50) NOT NULL  CHECK (LENGTH(`email`) >= 6 AND LENGTH(`email`) <= 50),
     `address` 			VARCHAR(800) 
 	-- `donation_amount` 	INT ,
    
@@ -105,7 +107,7 @@ INSERT INTO `Post` 	(`title`,							`content_1`,							`img_1`,
                                                         `startDate`,						`finishDate` 			)
 VALUE				('title1',							'content1',								'img1',		
 														'content2',								'img2',			
-														null, 									 null 	,		
+														5, 									 5 	,		
 														'2009-07-09',							'2009-07-09'				), 
 					('title2',							'content3',								'img3',		
 														'content4',								'img4',			
@@ -121,10 +123,10 @@ VALUE				('title1',							'content1',								'img1',
 														'2009-07-09',							'2009-07-09'				);
                                                         
                                                         
-UPDATE `mock_project`.`post` SET `donator_quantity` = '1', `money_achieved` = '1010' WHERE (`id` = '1');
-UPDATE `mock_project`.`post` SET `donator_quantity` = '1', `money_achieved` = '10' WHERE (`id` = '2');
-UPDATE `mock_project`.`post` SET `donator_quantity` = '1', `money_achieved` = '10' WHERE (`id` = '3');
-UPDATE `mock_project`.`post` SET `donator_quantity` = '1', `money_achieved` = '10' WHERE (`id` = '4');
+UPDATE `mock_project`.`post` SET `donator_quantity` = '1', `money_achieved` = '100' WHERE (`id` = '1');
+UPDATE `mock_project`.`post` SET `donator_quantity` = '10', `money_achieved` = '15' WHERE (`id` = '2');
+UPDATE `mock_project`.`post` SET `donator_quantity` = '21', `money_achieved` = '20' WHERE (`id` = '3');
+UPDATE `mock_project`.`post` SET `donator_quantity` = '15', `money_achieved` = '30' WHERE (`id` = '4');
    
    
    -- insert data Donator
@@ -197,7 +199,39 @@ UPDATE `mock_project`.`post` SET `img_1` = 'https://photo-cms-vovworld.zadn.vn/w
 UPDATE `mock_project`.`post` SET `img_1` = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHylNWX3d-BuUNDP7Aa8SWwgf4MD9w0yijaQ&usqp=CAU' WHERE (`id` = '10');
 UPDATE `mock_project`.`post` SET `img_1` = 'https://www.asialifemagazine.com/vietnam/wp-content/uploads/sites/4/2013/04/Urban-gardening-charity.jpg' WHERE (`id` = '11');
 UPDATE `mock_project`.`post` SET `img_1` = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjd1TmWLUYxTbtC6bMjkEwNNbNg6mRH4h_QQ&usqp=CAU' WHERE (`id` = '12');
+UPDATE `mock_project`.`post` SET `img_2` = 'https://m.baotuyenquang.com.vn/media/images/2020/10/img_20201030103937.jpg' WHERE (`id` = '1');
+UPDATE `mock_project`.`post` SET `img_2` = 'https://cdnmedia.thethaovanhoa.vn/2012/10/06/19/06/Quyen-gop.JPG' WHERE (`id` = '2');
+UPDATE `mock_project`.`post` SET `img_2` = 'https://file3.qdnd.vn/data/images/0/2021/01/06/vuhuyen/612020huyen7.jpeg' WHERE (`id` = '3');
+UPDATE `mock_project`.`post` SET `img_2` = 'https://image.vtc.vn/resize/th/upload/2022/01/23/thuy-tien1-16233403.png' WHERE (`id` = '4');
+UPDATE `mock_project`.`post` SET `img_2` = 'https://kenh14cdn.com/thumb_w/660/2020/10/22/tu-thien-1-1603381101396103468573.jpg' WHERE (`id` = '5');
+UPDATE `mock_project`.`post` SET `img_2` = 'https://haiha.quangninh.gov.vn/HinhAnhBaiViet/2018/Th%C3%A1ng%2011/C%C3%B4%20thi%20h%C3%A0nh%20%C3%A1n%20th%C3%ADch%20ki%E1%BA%BFm%20ti%E1%BB%81n%20l%C3%A0m%20t%E1%BB%AB%20thi%E1%BB%87n/%E1%BA%A3nh%20t%E1%BB%AB%20thi%E1%BB%87n.jpg' WHERE (`id` = '6');
+UPDATE `mock_project`.`post` SET `img_2` = 'https://vnn-imgs-f.vgcloud.vn/2019/11/17/16/nhung-chiec-tu-tu-thien-lam-am-mua-dong-ha-noi-7.jpg' WHERE (`id` = '7');
+UPDATE `mock_project`.`post` SET `img_2` = 'https://newsmd1fr.keeng.net/netnews/archive/images/20201016/100502_quyen_gop_ung_ho_2.jpg' WHERE (`id` = '8');
+UPDATE `mock_project`.`post` SET `img_2` = 'https://photo-cms-baonghean.zadn.vn/w607/Uploaded/2022/ftgbtgazsnzm/2018_09_04/bnatraoquachocacemhocsinhtieuhocmyly3118704492018_nhfb.jpg' WHERE (`id` = '9');
+UPDATE `mock_project`.`post` SET `img_2` = 'https://123sao.sgp1.digitaloceanspaces.com/wp-content/uploads/2021/09/07102722/a13.jpg' WHERE (`id` = '10');
+UPDATE `mock_project`.`post` SET `img_2` = 'https://znews-photo.zadn.vn/w660/Uploaded/pgi_ubnatyvau/2021_09_09/lethuya0010_zing_1.jpg' WHERE (`id` = '11');
+UPDATE `mock_project`.`post` SET `img_2` = 'https://cdnmedia.thethaovanhoa.vn/Upload/uJjLuL2HhNU2U6UnlwA/files/2020/10/28/tuthien/IMG_20201027_205547_Fotor.jpg' WHERE (`id` = '12');
+UPDATE `mock_project`.`post` SET `img_1` = 'https://cdnmedia.thethaovanhoa.vn/Upload/uJjLuL2HhNU2U6UnlwA/files/2020/10/28/tuthien/IMG_20201027_205547_Fotor.jpg', `img_2` = 'https://image.thanhnien.vn/300x210/uploaded/thuyanh/2015_11_11/trongbai_ogoj.jpg' WHERE (`id` = '14');
+UPDATE `mock_project`.`post` SET `img_1` = 'https://image.thanhnien.vn/300x210/uploaded/thuyanh/2015_11_11/trongbai_ogoj.jpg', `img_2` = 'https://image.thanhnien.vn/300x210/uploaded/thuyanh/2015_11_11/trongbai_ogoj.jpg' WHERE (`id` = '13');
                
 				
                 
             --     // -----------------------------------------
+            
+-- // Add plan_budget and rate:
+
+UPDATE `mock_project`.`post` SET `plan_budget` = '2000' WHERE (`id` = '1');
+UPDATE `mock_project`.`post` SET `plan_budget` = '2000' WHERE (`id` = '2');
+UPDATE `mock_project`.`post` SET `plan_budget` = '2000' WHERE (`id` = '3');
+UPDATE `mock_project`.`post` SET `plan_budget` = '2000' WHERE (`id` = '4');
+UPDATE `mock_project`.`post` SET `plan_budget` = '2000' WHERE (`id` = '5');
+UPDATE `mock_project`.`post` SET `plan_budget` = '2000' WHERE (`id` = '6');
+UPDATE `mock_project`.`post` SET `plan_budget` = '2000' WHERE (`id` = '7');
+UPDATE `mock_project`.`post` SET `plan_budget` = '2000' WHERE (`id` = '8');
+UPDATE `mock_project`.`post` SET `plan_budget` = '2000' WHERE (`id` = '9');
+UPDATE `mock_project`.`post` SET `plan_budget` = '2000' WHERE (`id` = '10');
+UPDATE `mock_project`.`post` SET `plan_budget` = '2000' WHERE (`id` = '11');
+UPDATE `mock_project`.`post` SET `plan_budget` = '2000' WHERE (`id` = '12');
+UPDATE `mock_project`.`post` SET `plan_budget` = '2000' WHERE (`id` = '13');
+UPDATE `mock_project`.`post` SET `plan_budget` = '2000' WHERE (`id` = '14');
+

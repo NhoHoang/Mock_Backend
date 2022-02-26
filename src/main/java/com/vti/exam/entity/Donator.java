@@ -28,7 +28,7 @@ public class Donator implements Serializable {
 	@Column(name = "`fullName`", nullable = false, length = 50)
 	private String fullName;
 
-	@Column(name = "`email`", nullable = false, length = 50, unique = true)
+	@Column(name = "`email`", nullable = false, length = 50 ) //unique = true
 	private String email;
 
 	@Column(name = "`address`", length = 800)
